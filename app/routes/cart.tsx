@@ -9,7 +9,7 @@ import { Buffer } from "buffer";
 
 // Configuration for payment API
 const BASE_URL = "https://payment-gateway.phajay.co"; // Replace with your actual API URL
-const KEY = "$2a$10$7pBgohWIIovcMxeAr7ItX.W1TkCkSIFZeRIjkTb3ZPvooztM8Kl0S"; // Replace with your actual API key
+const KEY = "YOUR_API_KEY"; // Replace with your actual API key
 
 export default function Cart() {
   const { cart } = useCart();
