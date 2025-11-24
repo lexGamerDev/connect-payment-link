@@ -22,35 +22,6 @@ export default function Cart() {
       return;
     }
 
-    setIsLoading(true);
-    
-    const authHeader = `Basic ${Buffer.from(`${KEY}:`).toString('base64')}`;
-    const newData = {
-      amount: cart.total,
-      description: `Order #${currentCartOrderId}`,
-      orderNo: currentCartOrderId,
-    }
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": authHeader,
-      }
-    }
-
-    try {
-      const response = await axios.post(`${BASE_URL}/v1/api/link/payment-link`, newData, config);
-      if (response.status === 200) {
-        console.log("response: ", response.data);
-        if (response.data?.redirectURL) {
-          window.location.href = response.data.redirectURL;
-        }
-        setIsLoading(false);
-      }
-    } catch (error) {
-      console.log(error);
-      setIsLoading(false);
-    }
-
   };
 
   return (
