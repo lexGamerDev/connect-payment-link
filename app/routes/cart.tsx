@@ -7,10 +7,6 @@ import { useState } from 'react';
 import axios from 'axios';
 import { Buffer } from "buffer";
 
-// Configuration for payment API
-const BASE_URL = "https://payment-gateway.phajay.co"; // Replace with your actual API URL
-const KEY = "YOUR_API_KEY"; // Replace with your actual API key
-
 export default function Cart() {
   const { cart } = useCart();
   const { currentCartOrderId } = useOrders();
@@ -21,6 +17,10 @@ export default function Cart() {
       alert('No items in cart');
       return;
     }
+
+    // Configuration for payment API
+    const BASE_URL = "https://payment-gateway.phajay.co"; // Replace with your actual API URL
+    const KEY = "YOUR_API_KEY"; // Replace with your actual API key
 
   };
 
