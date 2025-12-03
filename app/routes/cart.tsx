@@ -20,8 +20,35 @@ export default function Cart() {
 
     // Configuration for payment API
     const BASE_URL = "https://payment-gateway.phajay.co"; // Replace with your actual API URL
-    const KEY = "YOUR_API_KEY"; // Replace with your actual API key
+    const KEY = "$2a$10$7pBgohWIIovcMxeAr7ItX.W1TkCkSIFZeRIjkTb3ZPvooztM8Kl0S"; // Replace with your actual API key
 
+    const authToken = `Basic ${Buffer.from(KEY).toString('base64')}`;
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': authToken,
+    }
+    const data = {
+      amount: cart.total,
+      description: 'Order #' + currentCartOrderId,
+      orderNo: currentCartOrderId
+    }
+
+    try {
+      setIsLoading(true);
+      const response = await axios.post(`${BASE_URL}/v1/api/link/payment-link`,
+        data, 
+        { headers }
+      );
+      const { redirectURL } = response.data;
+
+      // Redirect to payment URL
+      window.location.href = redirectURL;
+    } catch (error) {
+      console.error('Error initiating payment:', error);
+      alert('Failed to initiate payment. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
