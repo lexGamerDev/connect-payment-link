@@ -12,50 +12,11 @@ export default function Cart() {
   const { currentCartOrderId } = useOrders();
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleBuyNow = async () => {
-    if (!currentCartOrderId) {
-      alert('No items in cart');
-      return;
-    }
-
-    // Configuration for payment API
-    const BASE_URL = "https://payment-gateway.phajay.co"; // Replace with your actual API URL
-    const KEY = "$2a$10$7pBgohWIIovcMxeAr7ItX.W1TkCkSIFZeRIjkTb3ZPvooztM8Kl0S"; // Replace with your actual API key
-
-    const authToken = `Basic ${Buffer.from(KEY).toString('base64')}`;
-    const headers = {
-      'Content-Type': 'application/json',
-      'Authorization': authToken,
-    }
-    const data = {
-      amount: cart.total,
-      description: 'Order #' + currentCartOrderId,
-      orderNo: currentCartOrderId
-    }
-
-    try {
-      setIsLoading(true);
-      const response = await axios.post(`${BASE_URL}/v1/api/link/payment-link`,
-        data, 
-        { headers }
-      );
-      const { redirectURL } = response.data;
-
-      // Redirect to payment URL
-      window.location.href = redirectURL;
-    } catch (error) {
-      console.error('Error initiating payment:', error);
-      alert('Failed to initiate payment. Please try again.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   return (
     <Layout>
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-800 mb-8">Shopping Cart</h1>
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Cart Items */}
           <div className="lg:col-span-2">
@@ -83,15 +44,9 @@ export default function Cart() {
                     </div>
                   </div>
                 </div>
-                
-                <button
-                  onClick={handleBuyNow}
-                  disabled={isLoading}
-                  className="w-full bg-blue-600 text-white py-3 px-4 rounded-md font-medium hover:bg-blue-700 transition-colors text-center block disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isLoading ? 'Processing...' : 'Buy Now'}
-                </button>
-                
+
+                {/* Button Buy Now */}
+
                 <Link
                   to="/products"
                   className="w-full mt-3 bg-gray-100 text-gray-700 py-2 px-4 rounded-md font-medium hover:bg-gray-200 transition-colors text-center block"
