@@ -46,6 +46,13 @@ export default function Cart() {
                 </div>
 
                 {/* Button Buy Now */}
+                <button
+                  // onClick={handleBuyNow}
+                  disabled={isLoading}
+                  className="w-full bg-blue-600 text-white py-3 px-4 rounded-md font-medium hover:bg-blue-700 transition-colors text-center block disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isLoading ? 'Processing...' : 'Buy Now'}
+                </button>
 
                 <Link
                   to="/products"
