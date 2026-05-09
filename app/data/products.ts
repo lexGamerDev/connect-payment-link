@@ -5,7 +5,7 @@ export const mockProducts: Product[] = [
     id: '1',
     name: 'iPhone 15 Pro',
     description: 'Latest from Apple with A17 Pro chip and new camera system',
-    price: 1,
+    price: 0.01,
     image: 'https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=500&h=500&fit=crop',
     category: 'Mobile Phones',
     stock: 15,
